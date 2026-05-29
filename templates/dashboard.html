@@ -1,5 +1,30 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Welcome, {{ user.username }}!</h2>
-<p><a href="{% url 'logout' %}">Logout</a></p>
+  <h2 class="text-center mb-4">📝 Your Notes</h2>
+
+  <div class="text-center mb-3">
+    <a href="{% url 'create_note' %}" class="btn btn-custom">➕ Add New Note</a>
+  </div>
+
+  {% for note in notes %}
+    <div class="card mb-3" style="background-color: {{ note.color }};">
+      <div class="card-body">
+        <h4 class="text-center">📌 {{ note.title }} 
+          {% if note.tag %}
+            <span class="badge bg-light text-dark">{{ note.tag }}</span>
+          {% endif %}
+        </h4>
+        <p class="card-text">{{ note.content|linebreaks }}</p>
+        <p class="text-muted small">🕒 {{ note.created_at|date:"d M Y, H:i" }}</p>
+        <div class="text-end">
+          <a href="{% url 'update_note' note.id %}" class="btn btn-sm btn-custom">✏️ Edit</a>
+          <a href="{% url 'delete_note' note.id %}" class="btn btn-sm btn-custom">❌ Delete</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-center">No notes yet 🥺</p>
+  {% endfor %}
+
 {% endblock %}

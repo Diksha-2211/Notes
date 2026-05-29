@@ -1,10 +1,15 @@
+
 {% extends "base.html" %}
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
-<p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+<div class="d-flex justify-content-center align-items-zcenter" style="min-height: 80vh;">
+  <div class="card p-4" style="min-width: 350px; background-color: #fff7f0;">
+    <h2 class="text-center mb-4">🔐 Login to Notes</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-custom w-100 mt-2">Login</button>
+    </form>
+    <p class="text-center mt-3">Don’t have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+  </div>
+</div>
 {% endblock %}
